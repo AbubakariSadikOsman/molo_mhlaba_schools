@@ -1,0 +1,5 @@
+id,student_code,campus_id,full_name,class,teacher,date_of_birth,gender,enrolment_date,allergies,medical_conditions,emotional_issues,psychological_problems,social_issues,notes,parent_name,parent_email
+123829f0-579c-43c3-8c8b-b90df2b52d83,TEN-0001,TEN,Anathi Skyler Rudolph,Frances Gqoba (Early Childhood),Xolelwa Dyantyi,2022-07-29,Female,2026-07-24,None,,,,,,Nomsa Rudolph,nomsa.rudolph@example.com
+d72972cf-db72-4584-8fff-22f94fa4244f,TEN-0002,TEN,Zoe Patel,Frances Gqoba (Early Childhood),Xolelwa Dyantyi,2022-05-02,Female,2025-02-10,None,,,Mild separation anxiety noted by parent,,,Priya Patel,priya.patel@example.com
+4745f838-7f54-4397-9c36-5ff545c59501,TEN-0003,TEN,Amara Chen,Grade R Blue,Ntombi Sithole,2021-11-30,Female,2024-01-20,None,,,,,,Wei Chen,wei.chen@example.com
+0ac98aa7-2aae-4e56-9c2c-4ffb6f509c09,TEN-0004,TEN,Mia van der Merwe,Grade 1 Gold,Peter Adams,2020-12-10,Female,2023-01-10,None,,,,,,Elsa van der Merwe,elsa.vandermerwe@example.com
