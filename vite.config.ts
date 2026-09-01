@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: false,
       includeAssets: ['logos/molo-mhlaba.png', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
         name: 'Molo Mhlaba Behaviour Tracker',
@@ -26,6 +27,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
         // Never cache Supabase API/auth calls — the app must always read live data.
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
