@@ -4,13 +4,26 @@ import { fmtDate, sevColor } from '../lib/stats';
 import { useAppData } from '../lib/AppDataContext';
 import { useUi } from '../lib/UiContext';
 
-export function LogRow({ r, showStudentLink = true }: { r: Incident; showStudentLink?: boolean }) {
+export function LogRow({
+  r,
+  showStudentLink = true,
+  onOpenStudent,
+}: {
+  r: Incident;
+  showStudentLink?: boolean;
+  onOpenStudent?: (id: string) => void;
+}) {
   const { students } = useAppData();
   const { openModal } = useUi();
   const student = students.find((s) => s.id === r.student_id);
 
+  function handleClick() {
+    if (onOpenStudent && student) onOpenStudent(student.id);
+    else openModal(<LogDetail r={r} />);
+  }
+
   return (
-    <div className="log-row" onClick={() => openModal(<LogDetail r={r} />)}>
+    <div className="log-row" onClick={handleClick}>
       <div className="log-sev" style={{ background: sevColor(r.severity) }}>
         {r.severity}
       </div>

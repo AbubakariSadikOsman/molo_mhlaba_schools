@@ -3,7 +3,7 @@ import { useAppData } from '../lib/AppDataContext';
 import { CATEGORY_ORDER } from '../types';
 import { LogRow } from '../components/LogRow';
 
-export function Log() {
+export function Log({ onOpenStudent }: { onOpenStudent: (id: string) => void }) {
   const { incidents, students, campuses, campusScope } = useAppData();
   const [search, setSearch] = useState('');
   const [cat, setCat] = useState('All categories');
@@ -36,7 +36,11 @@ export function Log() {
         </select>
       </div>
       <div className="card" style={{ padding: '4px 12px' }}>
-        {rows.length ? rows.map((r) => <LogRow key={r.id} r={r} />) : <div className="empty-hint">No matching incidents.</div>}
+        {rows.length ? (
+          rows.map((r) => <LogRow key={r.id} r={r} onOpenStudent={onOpenStudent} />)
+        ) : (
+          <div className="empty-hint">No matching incidents.</div>
+        )}
       </div>
     </div>
   );

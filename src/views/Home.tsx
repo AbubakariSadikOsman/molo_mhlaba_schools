@@ -3,7 +3,13 @@ import { CATEGORY_ORDER, CAT_VAR } from '../types';
 import { studentStats } from '../lib/stats';
 import { LogRow } from '../components/LogRow';
 
-export function Home({ onOpenLogForm }: { onOpenLogForm: () => void }) {
+export function Home({
+  onOpenLogForm,
+  onOpenStudent,
+}: {
+  onOpenLogForm: () => void;
+  onOpenStudent: (id: string) => void;
+}) {
   const { campuses, students, incidents, campusScope, setCampusScope, canSwitchCampus } = useAppData();
 
   const totalIncidents = incidents.length;
@@ -104,7 +110,11 @@ export function Home({ onOpenLogForm }: { onOpenLogForm: () => void }) {
 
       <div className="section-title">Recent incidents</div>
       <div className="card" style={{ padding: '4px 12px' }}>
-        {recent.length ? recent.map((r) => <LogRow key={r.id} r={r} />) : <div className="empty-hint">No incidents logged yet.</div>}
+        {recent.length ? (
+          recent.map((r) => <LogRow key={r.id} r={r} onOpenStudent={onOpenStudent} />)
+        ) : (
+          <div className="empty-hint">No incidents logged yet.</div>
+        )}
       </div>
 
       <button className="btn-primary" onClick={onOpenLogForm} style={{ marginTop: 4 }}>

@@ -239,3 +239,21 @@ export async function createParentCommunication(payload: NewParentCommunication)
   if (error) throw error;
   return data as ParentCommunication;
 }
+
+// Fire-and-forget-ish parent notification emails, sent by the send-parent-email
+// edge function (Resend). Callers should not block their own success toast on
+// these — surface a soft warning on failure instead, since the incident/ILP
+// change itself already saved successfully.
+export async function sendIncidentEmail(incidentId: string): Promise<void> {
+  const { error } = await supabase.functions.invoke('send-parent-email', {
+    body: { kind: 'incident', incidentId },
+  });
+  if (error) throw error;
+}
+
+export async function sendIlpStatusEmail(ilpPlanId: string, status: 'achieved' | 'discontinued'): Promise<void> {
+  const { error } = await supabase.functions.invoke('send-parent-email', {
+    body: { kind: 'ilp_status', ilpPlanId, status },
+  });
+  if (error) throw error;
+}

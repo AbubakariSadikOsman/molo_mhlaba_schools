@@ -75,6 +75,9 @@ export function IlpPanel({ student }: { student: Student }) {
   async function setStatus(id: string, status: IlpPlan['status']) {
     await api.updateIlpPlanStatus(id, status);
     await load();
+    if (status === 'achieved' || status === 'discontinued') {
+      api.sendIlpStatusEmail(id, status).catch(() => toast('Goal updated, but the parent email could not be sent'));
+    }
   }
 
   return (

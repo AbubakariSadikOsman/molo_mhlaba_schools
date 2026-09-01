@@ -37,7 +37,7 @@ export function LogForm() {
     setError(null);
     try {
       const student = students.find((s) => s.id === studentId);
-      await api.createIncident({
+      const incident = await api.createIncident({
         campus_id: campusId,
         student_id: studentId,
         date: new Date().toISOString().slice(0, 10),
@@ -50,6 +50,7 @@ export function LogForm() {
       await refresh();
       closeModal();
       toast(`Incident logged for ${student?.full_name ?? 'student'}`);
+      api.sendIncidentEmail(incident.id).catch(() => toast('Incident saved, but the parent email could not be sent'));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not save incident');
     } finally {

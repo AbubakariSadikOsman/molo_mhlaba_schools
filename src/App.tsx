@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AuthProvider, useAuth } from './auth/AuthProvider';
 import { SignIn } from './auth/SignIn';
-import { UiProvider, useUi } from './lib/UiContext';
+import { UiProvider, UiOverlay, useUi } from './lib/UiContext';
 import { AppDataProvider } from './lib/AppDataContext';
 import { ConfigNotice, PendingApproval } from './components/StatusScreens';
 import { supabaseConfigured } from './supabaseClient';
@@ -47,8 +47,8 @@ function Shell() {
       <CampusPicker open={campusPickerOpen} onClose={() => setCampusPickerOpen(false)} />
 
       <div className="view">
-        {view === 'home' && <Home onOpenLogForm={openLogForm} />}
-        {view === 'log' && <Log />}
+        {view === 'home' && <Home onOpenLogForm={openLogForm} onOpenStudent={openStudent} />}
+        {view === 'log' && <Log onOpenStudent={openStudent} />}
         {view === 'students' && <Students onOpenStudent={openStudent} />}
         {view === 'studentDetail' && studentId && (
           <StudentDetail studentId={studentId} onBack={() => setView('students')} />
@@ -71,6 +71,7 @@ function Shell() {
       )}
 
       <TabBar view={isAdminView(view) ? 'more' : view} onChange={setView} />
+      <UiOverlay />
     </div>
   );
 }
